@@ -14,5 +14,10 @@ A simple learning game, which uses Azure cognitive services, that I've made for 
   ![search-key](./media/search-keys.PNG)
   - Add `Bing Speech` key to `speechApiKey`
   ![speech-key](./media/speech-keys.PNG)
+  - Alternatively modify language by modifying `locale`. Supported locales can be found [here](https://docs.microsoft.com/en-us/azure/cognitive-services/Speech/api-reference-rest/bingvoiceoutput#SupLocales)
 - Build
+
+# Add/remove words used
+- Open up `words.txt` and add/remove words. Each word is separated by newline.
+
 
