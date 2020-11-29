@@ -3,7 +3,6 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <OutputType>WinExe</OutputType>
     <RootNamespace>alpha_beta</RootNamespace>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 

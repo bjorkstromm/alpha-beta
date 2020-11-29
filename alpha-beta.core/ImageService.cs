@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 
@@ -25,27 +26,26 @@ namespace alpha_beta.core
 
         public async Task<IEnumerable<Image>> GetImagesByTagAsync(string tag, int count)
         {
-            var uriQuery = Endpoint
+            var requestUri = Endpoint
                 + $"?q={Uri.EscapeDataString(tag)}"
                 + $"&count={Uri.EscapeDataString(count.ToString())}"
                 + $"&mkt={Uri.EscapeDataString(_configuration.Locale)}"
                 + $"&setLang={Uri.EscapeDataString(_configuration.Locale)}"
                 + "&safeSearch=strict";
 
-            var request = WebRequest.Create(uriQuery);
-            request.Headers["Ocp-Apim-Subscription-Key"] = _configuration.SearchKey;
+            using var httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", _configuration.SearchKey);
 
-            using (var response = (HttpWebResponse)await request.GetResponseAsync())
-            using (var stream = response.GetResponseStream())
-            using (var reader = new StreamReader(stream))
-            {
-                var json = JObject.Parse(reader.ReadToEnd());
+            using var response = await httpClient.GetAsync(requestUri);
+            response.EnsureSuccessStatusCode();
 
-                return json["value"].Select(t => 
-                    new Image(
-                        new Uri(t["thumbnailUrl"].ToString()), 
-                        new Uri(t["contentUrl"].ToString())));
-            }
+            var json = JObject.Parse(await response.Content.ReadAsStringAsync());
+
+            return json["value"].Select(t => 
+                new Image(
+                    new Uri(t["thumbnailUrl"].ToString()), 
+                    new Uri(t["contentUrl"].ToString())));
+            
         }
     }
 }
