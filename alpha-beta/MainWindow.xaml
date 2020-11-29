@@ -3,23 +3,20 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-        xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
-        xmlns:local="clr-namespace:alpha_beta"
-        xmlns:viewModel="clr-namespace:alpha_beta.ViewModel"
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525"
         DataContext="{Binding Main, Source={StaticResource Locator}}"
         Loaded="MainWindow_OnLoaded"
         Background="Black">
-    <i:Interaction.Triggers>
-        <i:EventTrigger EventName="KeyUp">
-            <cmd:EventToCommand Command="{Binding Mode=OneWay, Path=KeyUpCommand}" PassEventArgsToCommand="True"></cmd:EventToCommand>
-        </i:EventTrigger>
-        <i:EventTrigger EventName="KeyDown">
-            <cmd:EventToCommand Command="{Binding Mode=OneWay, Path=KeyDownCommand}" PassEventArgsToCommand="True"></cmd:EventToCommand>
-        </i:EventTrigger>
-    </i:Interaction.Triggers>
+    <b:Interaction.Triggers>
+        <b:EventTrigger EventName="KeyUp">
+            <b:InvokeCommandAction Command="{Binding Mode=OneWay, Path=KeyUpCommand}" PassEventArgsToCommand="True"></b:InvokeCommandAction>
+        </b:EventTrigger>
+        <b:EventTrigger EventName="KeyDown">
+            <b:InvokeCommandAction Command="{Binding Mode=OneWay, Path=KeyDownCommand}" PassEventArgsToCommand="True"></b:InvokeCommandAction>
+        </b:EventTrigger>
+    </b:Interaction.Triggers>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>

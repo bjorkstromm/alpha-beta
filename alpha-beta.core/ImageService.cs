@@ -10,7 +10,7 @@ namespace alpha_beta.core
 {
     public class ImageService
     {
-        private static string Endpoint = "https://api.cognitive.microsoft.com/bing/v7.0/images/search";
+        private static string Endpoint = "https://api.bing.microsoft.com/v7.0/images/search";
         private readonly Configuration _configuration;
 
         public ImageService(Configuration configuration)
@@ -29,7 +29,7 @@ namespace alpha_beta.core
                 + $"?q={Uri.EscapeDataString(tag)}"
                 + $"&count={Uri.EscapeDataString(count.ToString())}"
                 + $"&mkt={Uri.EscapeDataString(_configuration.Locale)}"
-                + $"&setLang={Uri.EscapeDataString(_configuration.Locale.Split('-').First())}"
+                + $"&setLang={Uri.EscapeDataString(_configuration.Locale)}"
                 + "&safeSearch=strict";
 
             var request = WebRequest.Create(uriQuery);

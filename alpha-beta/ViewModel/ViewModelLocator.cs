@@ -12,11 +12,10 @@
   See http://www.galasoft.ch/mvvm
 */
 
-using System;
-using GalaSoft.MvvmLight;
+using System.IO;
 using GalaSoft.MvvmLight.Ioc;
-using Microsoft.Practices.ServiceLocation;
 using alpha_beta.core;
+using Microsoft.Extensions.Configuration;
 
 namespace alpha_beta.ViewModel
 {
@@ -31,12 +30,15 @@ namespace alpha_beta.ViewModel
         /// </summary>
         public ViewModelLocator()
         {
-            ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+            var configRoot = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .AddEnvironmentVariables()
+                .Build();
 
-            var configuration = new Configuration(
-                System.Configuration.ConfigurationManager.AppSettings.Get("locale"),
-                System.Configuration.ConfigurationManager.AppSettings.Get("searchApiKey"),
-                System.Configuration.ConfigurationManager.AppSettings.Get("speechApiKey"));
+            var configuration = new Configuration();
+            configRoot.Bind(configuration);
+
             SimpleIoc.Default.Register<Configuration>(() => configuration);
             SimpleIoc.Default.Register<ImageService>();
             SimpleIoc.Default.Register<WordService>();
@@ -44,14 +46,8 @@ namespace alpha_beta.ViewModel
             SimpleIoc.Default.Register<MainViewModel>();
         }
 
-        public MainViewModel Main
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<MainViewModel>();
-            }
-        }
-        
+        public MainViewModel Main => SimpleIoc.Default.GetInstance<MainViewModel>();
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels

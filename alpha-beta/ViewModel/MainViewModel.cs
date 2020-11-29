@@ -1,24 +1,15 @@
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Threading;
 using alpha_beta.core;
 using GalaSoft.MvvmLight;
-using System.Windows;
 using System.IO;
-using GalaSoft.MvvmLight.Threading;
-using System.Net.Http;
 using System.Windows.Input;
-using GalaSoft.MvvmLight.CommandWpf;
 using System.Media;
 using System.Threading;
+using GalaSoft.MvvmLight.Command;
 
 namespace alpha_beta.ViewModel
 {
