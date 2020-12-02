@@ -4,10 +4,11 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>alpha_beta</RootNamespace>
     <UseWPF>true</UseWPF>
+    <Platforms>AnyCPU;x86</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\alpha-beta.core\alpha-beta.core.csproj" />
+    <ProjectReference Include="..\AlphaBeta.Core\AlphaBeta.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -2,7 +2,7 @@
 using System.Text;
 using System.Windows.Input;
 
-namespace alpha_beta.ViewModel
+namespace AlphaBeta.Utilities
 {
     internal static class KeyHelper
     {

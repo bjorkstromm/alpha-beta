@@ -1,0 +1,81 @@
+﻿<Window x:Class="AlphaBeta.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+        mc:Ignorable="d"
+        Title="Alpha-Beta" Height="350" Width="525"
+        DataContext="{Binding Main, Source={StaticResource Locator}}"
+        Loaded="MainWindow_OnLoaded"
+        Background="Black">
+
+    <b:Interaction.Triggers>
+        <b:EventTrigger EventName="KeyUp">
+            <b:InvokeCommandAction Command="{Binding Mode=OneWay, Path=KeyUpCommand}" PassEventArgsToCommand="True"></b:InvokeCommandAction>
+        </b:EventTrigger>
+        <b:EventTrigger EventName="KeyDown">
+            <b:InvokeCommandAction Command="{Binding Mode=OneWay, Path=KeyDownCommand}" PassEventArgsToCommand="True"></b:InvokeCommandAction>
+        </b:EventTrigger>
+    </b:Interaction.Triggers>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{Binding HasImages, Converter={StaticResource BoolToGridRowHeight}}"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!-- Images -->
+        <ListView Grid.Row="0" ItemsSource="{Binding Images}" 
+                 IsEnabled="False" Margin="10"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 ScrollViewer.VerticalScrollBarVisibility="Disabled">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="{Binding Path=Items.Count,RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Image Source="{Binding}"
+                           VerticalAlignment="Center" 
+                           HorizontalAlignment="Center" 
+                           Stretch="UniformToFill"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.Style>
+                <Style TargetType="{x:Type ListView}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ListView}">
+                                <ItemsPresenter/>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListView.Style>
+
+        </ListView>
+
+        <!-- Word -->
+        <Viewbox Grid.Row="1" Margin="25" StretchDirection="Both" Stretch="Uniform" >
+            <Grid>
+                <!-- Template -->
+                <TextBlock Text="{Binding Word}" 
+                           TextAlignment="Center" 
+                           FontStretch="Normal"
+                           Foreground="#333333" 
+                           FontSize="100"
+                           FontFamily="Courier New" />
+
+                <!-- Typed word -->
+                <TextBlock Text="{Binding TypedWord}" 
+                           Visibility="{Binding TypedWord, Converter={StaticResource StringToVisibility}}"
+                           TextAlignment="Center" 
+                           Foreground="Yellow"
+                           FontSize="100"
+                           FontFamily="Courier New" />
+            </Grid>
+        </Viewbox>
+    </Grid>
+</Window>

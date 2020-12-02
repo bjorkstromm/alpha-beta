@@ -1,0 +1,17 @@
+<Application x:Class="AlphaBeta.App" 
+             StartupUri="MainWindow.xaml" 
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             d1p1:Ignorable="d"
+             xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:converters="clr-namespace:AlphaBeta.Converters"
+             xmlns:vm="clr-namespace:AlphaBeta.Utilities">
+    <Application.Resources>
+        <ResourceDictionary>
+            <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True"  />
+            <converters:BoolToGridRowHeightConverter x:Key="BoolToGridRowHeight" />
+            <converters:StringToVisibilityConverter x:Key="StringToVisibility" />
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
