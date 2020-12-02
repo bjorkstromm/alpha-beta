@@ -1,4 +1,4 @@
-﻿namespace alpha_beta.core
+﻿namespace AlphaBeta.Core
 {
     public class Configuration
     {

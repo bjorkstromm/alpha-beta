@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace alpha_beta
+namespace AlphaBeta
 {
     /// <summary>
     /// Interaction logic for App.xaml

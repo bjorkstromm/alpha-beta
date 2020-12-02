@@ -1,13 +1,13 @@
 ﻿using System;
 
-namespace alpha_beta.core
+namespace AlphaBeta.Core
 {
-    public class Image
+    public class ImageLocation
     {
         public Uri ThumbnailUri { get; }
         public Uri ContentUri { get; }
 
-        public Image(Uri thumbnailUri, Uri contentUri)
+        public ImageLocation(Uri thumbnailUri, Uri contentUri)
         {
             ThumbnailUri = thumbnailUri;
             ContentUri = contentUri;
